@@ -300,6 +300,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CalculatorFrame().setVisible(true);
+                int test = 0;
             }
         });
     }
