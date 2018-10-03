@@ -159,25 +159,31 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnAC" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="btnPercentage" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnPoistiveNeg" alignment="0" min="-2" pref="47" max="-2" attributes="0"/>
                       <Component id="btnDivide" alignment="1" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnAC" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                          <Component id="btnPercentage" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnNine" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="btnEight" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="btnSeven" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnMult" alignment="0" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnNine" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                          <Component id="btnEight" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                          <Component id="btnSeven" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnFour" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="btnFive" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="btnSix" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnSubstract" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnFour" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                          <Component id="btnFive" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                          <Component id="btnSix" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
