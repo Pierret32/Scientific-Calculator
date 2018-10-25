@@ -5,17 +5,53 @@
  */
 package calculatorapp;
 
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
+
 /**
- *
- * @author pierrethomas
+ *Let us make the Changes to this Project Now
  */
 public class CalculatorFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form CalculatorFrame
      */
+    List<String> numbers = new ArrayList<String>(){};
+    int result =0;
+    float pointto =0;
     public CalculatorFrame() {
         initComponents();
+        
+        List<JButton> numbersLetters = Arrays.asList(btnOne, btnTwo, btnThree, btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnZero,
+                btnAdd, btnDecimal, btnDivide, btnPoistiveNeg, btnSubstract, btnPercentage,btnMult);
+        for (JButton buttons : numbersLetters) {
+
+            buttons.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    numbers.add(buttons.getText());
+                    String word = "";
+                    for (String num : numbers) {
+                        word += num;
+                    }
+                    jLabel1.setText(word);
+                   
+                }
+
+            });
+        }
+        
     }
 
     /**
@@ -30,7 +66,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
         jButton23 = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        txtOutCome = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnPoistiveNeg = new javax.swing.JButton();
         btnPercentage = new javax.swing.JButton();
@@ -51,6 +88,15 @@ public class CalculatorFrame extends javax.swing.JFrame {
         btnZero = new javax.swing.JButton();
         btnDecimal = new javax.swing.JButton();
         btnEqual = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        Cb_Addition = new javax.swing.JCheckBox();
+        Cb_Multipy = new javax.swing.JCheckBox();
+        Cb_Subtraction = new javax.swing.JCheckBox();
+        Cb_Divison = new javax.swing.JCheckBox();
+        btnBegin = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jLabel3 = new javax.swing.JLabel();
 
         jButton23.setText("jButton13");
 
@@ -58,24 +104,29 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
-        txtOutCome.setBackground(new java.awt.Color(255, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("CANNOT DIVIDE BY ZERO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(txtOutCome, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(txtOutCome, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
-                .addGap(19, 19, 19))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        jLabel2.setText("HISTORY");
+        jLabel2.setToolTipText("");
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -90,6 +141,11 @@ public class CalculatorFrame extends javax.swing.JFrame {
         btnAC.setBackground(new java.awt.Color(255, 0, 0));
         btnAC.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAC.setText("AC");
+        btnAC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnACActionPerformed(evt);
+            }
+        });
 
         btnSeven.setBackground(new java.awt.Color(255, 0, 0));
         btnSeven.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -138,11 +194,6 @@ public class CalculatorFrame extends javax.swing.JFrame {
         btnSubstract.setBackground(new java.awt.Color(255, 0, 0));
         btnSubstract.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSubstract.setText("-");
-        btnSubstract.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubstractActionPerformed(evt);
-            }
-        });
 
         btnAdd.setBackground(new java.awt.Color(255, 0, 0));
         btnAdd.setText("+");
@@ -158,42 +209,103 @@ public class CalculatorFrame extends javax.swing.JFrame {
         btnEqual.setBackground(new java.awt.Color(255, 0, 0));
         btnEqual.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnEqual.setText("=");
+        btnEqual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEqualActionPerformed(evt);
+            }
+        });
+
+        jPanel3.setBackground(new java.awt.Color(102, 102, 102));
+
+        Cb_Addition.setBackground(new java.awt.Color(102, 102, 102));
+        Cb_Addition.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Cb_Addition.setText("Add");
+
+        Cb_Multipy.setBackground(new java.awt.Color(102, 102, 102));
+        Cb_Multipy.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Cb_Multipy.setText("Multi");
+
+        Cb_Subtraction.setBackground(new java.awt.Color(102, 102, 102));
+        Cb_Subtraction.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Cb_Subtraction.setText("Sub");
+
+        Cb_Divison.setBackground(new java.awt.Color(102, 102, 102));
+        Cb_Divison.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Cb_Divison.setText("Div");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(Cb_Addition, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                        .addComponent(Cb_Subtraction, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(Cb_Multipy)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Cb_Divison, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Cb_Addition, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cb_Subtraction, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Cb_Divison, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cb_Multipy, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        btnBegin.setBackground(new java.awt.Color(255, 0, 0));
+        btnBegin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnBegin.setText("Begin");
+        btnBegin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBeginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnSeven, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAC, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE))
+                            .addComponent(btnAC, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnEight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnPoistiveNeg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnPoistiveNeg))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnPercentage, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)))
+                            .addComponent(btnPercentage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnOne, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                                    .addComponent(btnFour, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(btnOne, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnFour, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnFive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnTwo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(btnZero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(btnFive, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnTwo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnZero, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnThree, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                            .addComponent(btnSix, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDecimal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnThree, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSix, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDecimal, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnMult, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,46 +313,63 @@ public class CalculatorFrame extends javax.swing.JFrame {
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEqual, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDivide, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(btnBegin, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPoistiveNeg, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDivide, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAC, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnPercentage, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMult, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnNine, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEight, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSeven, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSubstract, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnFour, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnFive, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSix, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnOne, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnTwo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnThree, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(14, 14, 14)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnZero, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDecimal, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEqual, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBegin, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPoistiveNeg, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDivide, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnAC, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnPercentage, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnMult, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnNine, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnEight, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSeven, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSubstract, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnFour, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnFive, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSix, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnOne, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTwo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnThree, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnZero, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDecimal, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEqual, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(27, 27, 27))
         );
+
+        jList1.setToolTipText("");
+        jScrollPane1.setViewportView(jList1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -251,24 +380,430 @@ public class CalculatorFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 119, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(297, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSubstractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubstractActionPerformed
+    private void btnACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnACActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSubstractActionPerformed
+        String history = "";
+        DefaultListModel memory = new DefaultListModel();
 
+        for(String s : numbers) 
+        {
+            history = history.concat(s);
+        }
+        memory.addElement(history.concat(" = " + Float.toString(pointto)));
+        jList1.setModel(memory);
+        numbers.clear();
+        jLabel1.setText("");
+    }//GEN-LAST:event_btnACActionPerformed
+
+    private void btnEqualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEqualActionPerformed
+        Results();
+    }//GEN-LAST:event_btnEqualActionPerformed
+
+    private void btnBeginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBeginActionPerformed
+        // TODO add your handling code here:
+        Random rand = new Random();
+        //        for(int a = 0; a < 3; a++)
+        //        {
+            //            JOptionPane.showMessageDialog(null, rand.nextInt(25));
+            //        }
+
+        //int value = rand.nextInt(50);
+        List<JCheckBox> checkboxes = Arrays.asList(Cb_Addition,Cb_Divison,Cb_Multipy,Cb_Subtraction);
+        int count = 0;
+        Map <Integer, Integer> addition, substraction;
+        addition = substraction = new HashMap<Integer,Integer>();
+
+        String add = "+";
+
+        int sum1,sum2; sum1=sum2 =0;
+        int div1,div2; div1=div2 =0;
+        int multi1,multi2; multi1=multi2 =0;
+        int sub1,sub2; sub1=sub2 =0;
+        for(JCheckBox input : checkboxes)
+        {
+            if(input.isSelected())
+            {
+                count++;
+                //Additions
+                switch (input.getText()) {
+                    //Divison
+                    case "Add":
+                    for(int a = 0; a < 2; a++)
+                    {
+                        if(a == 0)
+                        {
+                            sum1 = rand.nextInt(50);
+                        }
+                        else
+                        {
+                            sum2 = rand.nextInt(50);
+                        }
+                    }   int result1 = Integer.parseInt(JOptionPane.showInputDialog("What is The Sum of: " + sum1 + " + " + sum2));
+                    if (result1 == (sum1 + sum2))
+                    {
+                        jLabel1.setText("Correct Addition of " + sum1 + " + " + sum2 + "=" + result1);
+                    }
+                    else
+                    {
+                        jLabel1.setText("Sorry In Correct,  the Sum is " + (sum1 + sum2));
+                    }   break;
+                    //Multiplication
+                    case "Div":
+                    for(int a = 0; a < 2; a++)
+                    {
+                        if(a == 0)
+                        {
+                            div1 = rand.nextInt(100);
+                        }
+                        else
+                        {
+                            div2 = rand.nextInt(50);
+                        }
+                    }   float result2 = Float.parseFloat(JOptionPane.showInputDialog("What is The Division of: " + div1 + " / " + div2 + "\nPlease Round"));
+                    if (result2 == (div1 / div2))
+                    {
+                        jLabel1.setText("Correct Division of  " + div1 + " / " + div2 + "=" + result2);
+                    }
+                    else
+                    {
+                        jLabel1.setText("Sorry InCorrect,  the Division is " + (div1 / div2));
+                    }    break;
+                    //Substraction
+                    case "Multi":
+                    for(int a = 0; a < 2; a++)
+                    {
+                        if(a == 0)
+                        {
+                            multi1 = rand.nextInt(100);
+                        }
+                        else
+                        {
+                            multi2 = rand.nextInt(50);
+                        }
+                    }   float result3 = Float.parseFloat(JOptionPane.showInputDialog("What is The Multiplication of: " + multi1 + " * " + multi2));
+                    if (result3 == (multi1 * multi2))
+                    {
+                        jLabel1.setText("Correct Multiplication of " + multi1 + " * " + multi2 + "=" + result3);
+                    }
+                    else
+                    {
+                        jLabel1.setText("Sorry InCorrect,  the Division is " + (multi1 * multi2));
+                    }    break;
+                    case "Sub":
+                    for(int a = 0; a < 2; a++)
+                    {
+                        if(a == 0)
+                        {
+                            sub1 = rand.nextInt(100);
+                        }
+                        else
+                        {
+                            sub2 = rand.nextInt(50);
+                        }
+                    }   float result4 = Float.parseFloat(JOptionPane.showInputDialog("What is The Substraction of: " + sub1 + " - " + sub2));
+                    if (result4 == (sub1 - sub2))
+                    {
+                        jLabel1.setText("Correct Substraction of " +sub1 + " - " + sub2 + "=" + result4);
+                    }
+                    else
+                    {
+                        jLabel1.setText("Sorry InCorrect,  the Substraction is " + (sub1 - sub2));
+                    }    break;
+                    default:
+                    break;
+                }
+
+            }
+        }
+        //        int sum1,sum2; sum1=sum2 =0;
+        //        for(Map.Entry<Integer, Integer> entry : addition.entrySet())
+        //        {
+            //            if(entry.getKey().equals(0))
+            //            {
+                //                sum1 = entry.getValue();
+                //            }
+            //            else
+            //            {
+                //                sum2 = entry.getValue();
+                //            }
+            //        }
+
+        // JOptionPane.showMessageDialog(null, count);
+
+    }//GEN-LAST:event_btnBeginActionPerformed
+
+     private void Results()
+    {
+       int count = 0;
+       //int pointto = 0;
+      
+      for(int i = 0; i < Equation(numbers).size(); i++)
+      {
+          if(Equation(numbers).get(i).equals("+"))
+          {
+                count++;
+                if(count <= 1)
+                {
+                  //  System.out.println("Less Add Ins\t" + Equation(numbers).get(i - 1));
+                   // System.out.println("LessAdd Ins\t" + Equation(numbers).get(i + 1));
+                    pointto += Float.parseFloat(Equation(numbers).get(i - 1)) + Float.parseFloat(Equation(numbers).get(i + 1));
+                }
+                else 
+                {
+                    //System.out.println("Great Add Ins\t" + Equation(numbers).get(i - 1));
+                    //System.out.println("Else Great Add Ins\t" + Equation(numbers).get(i + 1));
+                    pointto += Float.parseFloat(Equation(numbers).get(i + 1));
+                }
+               
+               // System.out.println("Count Add\t" + count);
+          }
+          else if(Equation(numbers).get(i).equals("*"))
+          {
+               count++;
+               if(count <= 1)
+               {
+                  //  System.out.println("Less Multi Ins\t" + Equation(numbers).get(i - 1));
+                   // System.out.println("Less Multi Ins\t" + Equation(numbers).get(i + 1));
+                    pointto += Float.parseFloat(Equation(numbers).get(i - 1)) * Float.parseFloat(Equation(numbers).get(i + 1));
+               }
+               else
+               {
+                    //System.out.println("Great Multi Ins\t" + Equation(numbers).get(i - 1));
+                  //  System.out.println("Else Great Multi Ins\t" + Equation(numbers).get(i + 1));
+                    pointto *=  Float.parseFloat(Equation(numbers).get(i + 1));
+               }
+              
+               // System.out.println("Count Multi\t" + count);
+          } 
+          else if(Equation(numbers).get(i).equals("/"))
+          {
+               count++;
+               if(count <= 1)
+               {
+                   // System.out.println("Less Divide Ins\t" + Equation(numbers).get(i - 1));
+                   // System.out.println("Less Divide Ins\t" + Equation(numbers).get(i + 1));
+                    pointto += Float.parseFloat(Equation(numbers).get(i - 1)) / Float.parseFloat(Equation(numbers).get(i + 1));
+               }
+               else
+               {
+                   //System.out.println("Great Divide Ins\t" + Equation(numbers).get(i - 1));
+                   //System.out.println("Else Great Divide Ins\t" + Equation(numbers).get(i + 1));
+                   pointto /= Float.parseFloat(Equation(numbers).get(i + 1));
+               }
+               
+              // System.out.println("Count Divide\t" + count);
+          }
+          else if(Equation(numbers).get(i).equals("-"))
+          {
+               count++;
+               if(count <= 1)
+               {
+                  // System.out.println("Less Sub Ins\t" + Equation(numbers).get(i - 1));
+                  // System.out.println("Less Sub Ins\t" + Equation(numbers).get(i + 1));
+                   pointto += Float.parseFloat(Equation(numbers).get(i - 1)) - Float.parseFloat(Equation(numbers).get(i + 1));
+               }
+               else
+               {
+                    //System.out.println("Great Sub Ins\t" + Equation(numbers).get(i - 1));
+                   // System.out.println("Else Great Sub Ins\t" + Equation(numbers).get(i + 1));
+                    pointto -= Float.parseFloat(Equation(numbers).get(i + 1));
+               }
+              
+              // System.out.println("Count Sub\t" + count);
+          }
+       
+      }
+         //System.out.println("Result\t" + pointto);
+        jLabel1.setText(Float.toString(pointto));
+    }
+    private static List<String> Equation(List<String>numbers)
+    {
+        List<String> setIn_Point = new ArrayList<String>() {};
+        List<String> setIn_Point2 = new ArrayList<String>() {};
+        
+        
+        for (Map.Entry<String, List<Integer>> entry : CheckValue(numbers).entrySet()) {
+            if (entry.getKey().equals("Plus_Sign"))
+            {
+                //System.out.println("Size\t" +entry.getValue().size());
+                if (entry.getValue().size() <= 1) 
+                {
+                    String testing2 = "";
+                    String testing = "";
+                    for (int a = 0; a < entry.getValue().size(); a++) 
+                    {
+                       // System.out.println("Values \t" + entry.getValue().get(a));
+                        for (int ab = a; ab < entry.getValue().get(a); ab++)
+                        {
+                            testing2 = testing2.concat(numbers.get(ab));
+                            //System.out.println("Testing2\t" + testing2);
+                        }
+                        setIn_Point.add(testing2);
+                        
+                       if (entry.getValue().indexOf(Collections.max(entry.getValue())) == a) 
+                            {
+                                for (int ab = Collections.max(entry.getValue()); ab < numbers.size(); ab++) {
+                                    testing = testing.concat(numbers.get(ab));
+                                }
+                               // System.out.println("Testing3\t" + testing);
+                                setIn_Point.add(testing);
+                            }
+                    }
+                }
+                else 
+                {
+                    for (int a = 0; a < entry.getValue().size(); a++) {
+                        String testing = "";
+                        String testing2 = "";
+                        String testing3 = "";
+                        if (a > 0) 
+                        {
+                            for (int ab = entry.getValue().get(a - 1); ab < entry.getValue().get(a); ab++) {
+                                testing = testing.concat(numbers.get(ab));
+                                //System.out.println("Testing\t" + testing);
+                            }
+                            setIn_Point.add(testing);
+                            if (entry.getValue().indexOf(Collections.max(entry.getValue())) == a) 
+                            {
+                                for (int ab = Collections.max(entry.getValue()); ab < numbers.size(); ab++) {
+                                    testing3 = testing3.concat(numbers.get(ab));
+                                }
+                               // System.out.println("Testing3\t" + testing3);
+                                setIn_Point.add(testing3);
+                            }
+                        } 
+                        else if (a < 1) 
+                        {
+
+                            for (int ab = a; ab < entry.getValue().get(a); ab++) {
+                                testing2 = testing2.concat(numbers.get(ab));
+                               // System.out.println("Testing2\t" + testing2);
+                            }
+                            setIn_Point.add(testing2);
+                        }
+                    }
+                }
+
+            }
+        }
+         //System.out.println("---------------------------");
+        for(String Item : setIn_Point)
+        {
+           //System.out.println(Item);
+            if(Item.contains("+"))
+            {
+                String parts[] = Item.split("\\+");
+                setIn_Point2.add("+");
+                setIn_Point2.add(parts[1]);
+               // System.out.print(parts[1]);
+            }
+            else if(Item.contains("-"))
+            {
+                String parts[] = Item.split("\\-");
+                setIn_Point2.add("-");
+                setIn_Point2.add(parts[1]);
+                //System.out.print(parts[1]);
+            }
+            else if(Item.contains("/"))
+            {
+                String parts[] = Item.split("\\/");
+                setIn_Point2.add("/");
+                setIn_Point2.add(parts[1]);
+            }
+            else if(Item.contains("*"))
+            {
+                String parts[] = Item.split("\\*");
+                setIn_Point2.add("*");
+                setIn_Point2.add(parts[1]);
+            }
+            else
+            {
+                setIn_Point2.add(Item);
+            }
+        }
+        
+        return setIn_Point2;
+    }
+    private static String WordReturn(int startingPoint, List<String> numbers)
+    {
+        String return_digit = "";
+
+        for (int ab = 0; ab < startingPoint; ab++) {
+            return_digit = return_digit.concat(numbers.get(ab));
+
+        }
+        return return_digit;
+    }
+    /*Method doesn't function are Required*/
+    private static Map<String,List<Integer>> CheckValue(List<String> numbers)
+    {
+
+        
+        Map<String,List<Integer>> map1 = new HashMap<String,List<Integer>>();
+        
+        List<Integer> plusIndex,minusIndex,DivideIndex,MultiIndex; //List for Error Logs
+        plusIndex = minusIndex = DivideIndex = MultiIndex = new ArrayList<Integer>(){};
+        
+        for(int i = 0; i < numbers.size(); i++)
+        {
+            switch (numbers.get(i)) {
+                case "+":
+                    plusIndex.add(i);
+                    //plusSign.add(numbers.get(i));
+                    break;
+                case "-":
+                    minusIndex.add(i);
+                    //minusSign.add(numbers.get(i));
+                    break;
+                case "/":
+                    DivideIndex.add(i);
+                    //DivideSign.add(numbers.get(i));
+                    break;
+                case "*":
+                    MultiIndex.add(i);
+                    //MultiSign.add(numbers.get(i));
+                    break;
+                default:
+                    break;
+            }
+        }
+        map1.put("Plus_Sign",plusIndex);
+        map1.put("Minus_Sign",minusIndex);
+        map1.put("Divide_Sign",DivideIndex);
+        map1.put("Multi_Sign",MultiIndex);
+        
+        return map1;
+    }
     /**
      * @param args the command line arguments
      */
@@ -300,15 +835,18 @@ public class CalculatorFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CalculatorFrame().setVisible(true);
-                int test = 0;
             }
         });
     }
-    //blahblahblah
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox Cb_Addition;
+    private javax.swing.JCheckBox Cb_Divison;
+    private javax.swing.JCheckBox Cb_Multipy;
+    private javax.swing.JCheckBox Cb_Subtraction;
     private javax.swing.JButton btnAC;
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnBegin;
     private javax.swing.JButton btnDecimal;
     private javax.swing.JButton btnDivide;
     private javax.swing.JButton btnEight;
@@ -328,8 +866,13 @@ public class CalculatorFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnZero;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton23;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtOutCome;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
