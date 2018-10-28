@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 public class CalculatorFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form CalculatorFrame
+     * Fixed Changes
      */
     List<String> numbers = new ArrayList<String>(){};
     int result =0;
